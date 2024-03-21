@@ -46,6 +46,7 @@ const number = document.querySelectorAll(".num");
 const operator = document.querySelectorAll(".operator");
 const del = document.querySelector(".delete");
 const clear = document.querySelector(".clear");
+const equals = document.querySelector(".equals");
 let num1 = num2 = Number("0");
 let functionOperator = "a";
 
@@ -74,6 +75,14 @@ operator.forEach((op) => {
         }
         else{
             num2 = display.textContent;
+            if(num2 === 0 && functionOperator === "/"){
+                num1 = NaN;
+                display.textContent = "Math Error";
+                number.forEach((num)=> {num.disabled = true});
+                operator.forEach((op)=>{op.disabled = true});
+                equals.disabled = true;
+                del.disabled = true;
+            }
             num1 = operate(num1,num2,functionOperator);
             display.textContent = num1;
             num2 = Number("0");
@@ -93,4 +102,26 @@ del.addEventListener("click",function(){
 clear.addEventListener("click",function(){
     display.textContent = "0";
     num1 = num2 = Number("0");
+    number.forEach((num)=> {num.disabled = false});
+    operator.forEach((op)=>{op.disabled = false});
+    equals.disabled = false;
+    del.disabled = false;
 });
+
+equals.addEventListener("click",function(){
+    if(num1 != 0){
+        if(functionOperator != "a"){
+            num2 = display.textContent;
+            if(num2 === 0 && functionOperator === "/"){
+                num1 = NaN;
+                display.textContent = "Math Error";
+                number.forEach((num) => {num.disabled = true});
+                operator.forEach((op) => {op.disabled = true});
+                equals.disabled = true;
+                del.disabled = true;
+            }
+            num1 = operate(num1,num2,functionOperator);
+            display.textContent = num1; 
+        }
+    }
+})

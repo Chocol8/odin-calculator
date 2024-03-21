@@ -8,6 +8,7 @@
     border: 10px black solid;
     padding: 7px;
     gap: 10px;
+    background-color: rgb(255, 255, 255);
 }
 
 .container{
@@ -29,12 +30,15 @@ button{
 }
 
 .operator, .delete, .clear{
+    border: 0;
     background-color: blue;
     color: white;
 }
 
 .num, .equals{
-    background-color: white;
+    border: 0;
+    background-color: #e0115f;
+    color: white;
 }
 
 .button-row{
@@ -47,7 +51,6 @@ button{
     display: flex;
     gap: 4px;
     margin-bottom: 4px;
-    justify-content: flex-end;
 }
 
 .number-display{
@@ -57,4 +60,5 @@ button{
     border: 2px black solid;
     padding: 5px;
     height: 75px;
+    background-color: white;
 }
