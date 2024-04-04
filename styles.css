@@ -8,7 +8,7 @@
     border: 10px black solid;
     padding: 7px;
     gap: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: #336699;
 }
 
 .container{
@@ -21,24 +21,30 @@
 button{
     display: flex;
     border-radius: 50%;
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 35px;
 }
 
-.operator, .delete, .clear{
+.operator{
     border: 0;
-    background-color: blue;
-    color: white;
+    background-color: #DAF7DC;
+    color: black;
+}
+
+.delete, .clear{
+    border: 0;
+    background-color: #9EE493;
+    color: black;
 }
 
 .num, .equals{
     border: 0;
-    background-color: #e0115f;
-    color: white;
+    background-color: #86BBD8;
+    color: black;
 }
 
 .button-row{
@@ -58,7 +64,10 @@ button{
     font-size: 64px;
     text-align: end;
     border: 2px black solid;
-    padding: 5px;
+    padding: 7px;
     height: 75px;
-    background-color: white;
+    background-color: #E0E0E0;
+    max-width: 500px;
+    height: 75px;
+    overflow: hidden;
 }

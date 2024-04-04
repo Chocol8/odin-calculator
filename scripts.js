@@ -47,7 +47,8 @@ const operator = document.querySelectorAll(".operator");
 const del = document.querySelector(".delete");
 const clear = document.querySelector(".clear");
 const equals = document.querySelector(".equals");
-let num1 = num2 = Number("0");
+let num1, num2;
+num1 = num2 = Number("0");
 let functionOperator = "a";
 
 number.forEach((num) => {
@@ -66,15 +67,15 @@ number.forEach((num) => {
 
 operator.forEach((op) => {
     op.addEventListener("click", function(){
+        functionOperator = op.value;
         if(num1 === 0){
-            num1 = display.textContent;
-            functionOperator = op.value;
+            num1 = Number(display.textContent);
             if(num2 === 0){
-                display.textContent = "0";
+                display.textContent = "";
             }
         }
         else{
-            num2 = display.textContent;
+            num2 = Number(display.textContent);
             if(num2 === 0 && functionOperator === "/"){
                 num1 = NaN;
                 display.textContent = "Math Error";
@@ -83,10 +84,9 @@ operator.forEach((op) => {
                 equals.disabled = true;
                 del.disabled = true;
             }
-            num1 = operate(num1,num2,functionOperator);
-            display.textContent = num1;
-            num2 = Number("0");
-            functionOperator = op.value;
+            display.textContent = num1 = operate(num1,num2,functionOperator);
+            num2 = Number("0");  
+            
         }
     });
 });
@@ -109,9 +109,9 @@ clear.addEventListener("click",function(){
 });
 
 equals.addEventListener("click",function(){
-    if(num1 != 0){
+    if(num1 != 0){  
         if(functionOperator != "a"){
-            num2 = display.textContent;
+            num2 = Number(display.textContent);
             if(num2 === 0 && functionOperator === "/"){
                 num1 = NaN;
                 display.textContent = "Math Error";
@@ -121,7 +121,10 @@ equals.addEventListener("click",function(){
                 del.disabled = true;
             }
             num1 = operate(num1,num2,functionOperator);
+            result = num1;
             display.textContent = num1; 
+            num2 = Number("0");
+            functionOperator = "a";
         }
     }
-})
+});
