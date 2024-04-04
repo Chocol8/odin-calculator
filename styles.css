@@ -41,7 +41,7 @@ button{
     color: black;
 }
 
-.num, .equals{
+.num, .equals, .decimal {
     border: 0;
     background-color: #86BBD8;
     color: black;

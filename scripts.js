@@ -36,7 +36,7 @@ function operate(num1,num2,operator){
     }
     else if(operator=="/"){
         let result = divide(num1,num2);
-        return result;
+        return result.toPrecision(8 );
     }
 }
 
@@ -47,20 +47,31 @@ const operator = document.querySelectorAll(".operator");
 const del = document.querySelector(".delete");
 const clear = document.querySelector(".clear");
 const equals = document.querySelector(".equals");
+const decimal = document.querySelector(".decimal");
 let num1, num2;
 num1 = num2 = Number("0");
 let functionOperator = "a";
 
 number.forEach((num) => {
     num.addEventListener("click",function(){
-        if(display.textContent.at(0) === "0"){
-            display.textContent = num.value;
+        if(display.textContent.length <= 9){
+            if(display.textContent.at(0) === "0"){
+                if(display.textContent.indexOf('.') !== -1){
+                    display.append(num.value);
+                }
+                else{
+                    display.textContent = num.value;
+                }
+            }
+            else{
+                if(num1 != 0 && display.textContent == num1){
+                    display.textContent = "";
+                }
+                display.append(num.value);
+            }
         }
         else{
-            if(num1 != 0 && display.textContent == num1){
-                display.textContent = "";
-            }
-            display.append(num.value);
+            num.disabled = true;
         }
     });
 });
@@ -73,6 +84,8 @@ operator.forEach((op) => {
             if(num2 === 0){
                 display.textContent = "";
             }
+            decimal.disabled = false;
+            number.forEach((num)=> {num.disabled = false});
         }
         else{
             num2 = Number(display.textContent);
@@ -86,12 +99,16 @@ operator.forEach((op) => {
             }
             display.textContent = num1 = operate(num1,num2,functionOperator);
             num2 = Number("0");  
-            
+            decimal.disabled = false;   
+            number.forEach((num)=> {num.disabled = false});
         }
     });
 });
 
 del.addEventListener("click",function(){
+    if(display.textContent.indexOf('.') !== -1){
+        decimal.disabled = false;
+    }
     let text = display.textContent;
     display.textContent = text.substr(0,text.length-1);
     if(display.textContent === ""){
@@ -106,6 +123,7 @@ clear.addEventListener("click",function(){
     operator.forEach((op)=>{op.disabled = false});
     equals.disabled = false;
     del.disabled = false;
+    decimal.disabled = false;
 });
 
 equals.addEventListener("click",function(){
@@ -127,4 +145,9 @@ equals.addEventListener("click",function(){
             functionOperator = "a";
         }
     }
+});
+
+decimal.addEventListener("click",function(){    
+    display.append(".");
+    decimal.disabled = true;
 });
